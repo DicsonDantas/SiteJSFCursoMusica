@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Cadastro de Cursos</title>
+</h:head>
+
+<h:body>
+	<h:form id="form-curso">
+		<p:panel header="Cadastro de Cursos" style="width:60%;">
+		 <p:growl/>
+			<p:panelGrid columns="2" style="width:95%;">
+             <h:outputLabel value="Nome:" />
+             <p:inputText value="#{cursoBean.curso.nome}" required="true" requiredMessage="Você deve informar o nome do Usuário"
+             validatorMessage="O nome do Curso deve ter entre 3 e 15 caracteres">
+             <f:validateLength minimum="3" maximum="15"/> 	
+             </p:inputText>
+             <h:outputLabel value="Descrição:" />
+             <p:inputTextarea value ="#{cursoBean.curso.descricao}" cols="40" rows="3"
+             required="true" requiredMessage="Preencha a descrição do curso"/>  
+               
+             <h:outputLabel value="Duração:" />
+             <p:spinner value="#{cursoBean.curso.duracao}" min="1" max ="10" stepFactor="0.5" size="1"/>
+           
+             
+             <h:outputLabel value="Tipo:" />
+             
+             
+             <p:selectOneMenu value="#{cursoBean.curso.tipo}" required="true" requiredMessage="Selecione o tipo de Curso!">
+                 <f:selectItem itemLabel=":Selecione:" itemvalue="#{null}"/>
+                 <f:selectItems value="#{cursoBean.tipos}" var="tipo"
+                  itemlabel="#{tipo.label}" itemvalue="#{tipo}"/>
+                	
+                
+             </p:selectOneMenu>
+             
+            <h:outputLabel value="Data de Criação" />
+            <p:calendar value ="#{cursoBean.curso.dataCriacao}" pattern="dd/MM/yyyy" maxdate="#{cursoBean.dataAtual}"/>
+             
+			</p:panelGrid>
+		     <p:commandButton icon="ui-icon-disk" value="Salvar" action="#{cursoBean.salvar}"
+		     update="@form"/>
+		     <h:form>
+    <p:growl id="messages" showDetail="true"/>
+ 
+ 
+   
+   
+</h:form>
+		   
+		</p:panel>
+	</h:form>
+
+</h:body>
+
+</html>
